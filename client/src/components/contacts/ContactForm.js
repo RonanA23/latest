@@ -12,8 +12,8 @@ const ContactForm = () => {
             setContact({
                 name:'',
                 email:'',
-                type:'personal',
-                phone:''
+                phone:'',
+                type:'personal'
             })
         }
     },[contactContext,current])
@@ -34,27 +34,32 @@ const ContactForm = () => {
             addContact(contact)
         } else{
             updateContact(contact)
-        }}
+        }clearAll()
+}
              
 
-    const onClear=()=>{
+    const clearAll=()=>{
         clearCurrent()
     }
     return (
         <form onSubmit={onSubmit}>
-            <h2 className='text-primary'>{current? 'Edit Contact':'Add Contact'}</h2>
+            <h2 className='text-primary'>
+                {current? 'Edit Contact':'Add Contact'}
+            </h2>
             <input 
             type='text' 
             name='name' 
             value={name} 
             placeholder='Name' 
-            onChange={onChange}/>
+            onChange={onChange}
+            />
             <input 
             type='text' 
             name='email' 
             value={email} 
             placeholder='Email' 
-            onChange={onChange}/>
+            onChange={onChange}
+            />
             <input 
             type='text' 
             name='phone' 
@@ -78,12 +83,21 @@ const ContactForm = () => {
     checked={type==='professional'} 
     onChange={onChange}
     />{''}
-    Professional{''}
+    Professional
             <div>
-    <button className='btn btn-primary btn-block'>{current? 'Update Contact':'Add Contact'}</button>
+    <input
+    type='submit' 
+    className='btn btn-primary btn-block'
+    value={current? 'Update Contact':'Add Contact'}
+    />
             </div>
-            {current && <button className='btn-block btn-light'onClick={onClear}>Clear</button>}
-        </form>
+            {current && (
+            <div>
+                <button className='btn-block btn-light'onClick={clearAll}>
+                    Clear
+                    </button>
+
+                </div>)} </form>
     )
 }
 
